@@ -16,12 +16,9 @@ WHEN I click on the links in the Table of Contents
 THEN I am taken to the corresponding section of the README
  */
 
-
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-// TODO: Create an array of questions for user input
-const questions = ["Please enter the project title", "Please Enter a Description","Please enter the installation instructions", "Please enter usage instructions", "Please enter license information", "Please give Contributing info", "Please enter instructions on how to test your application"];
+const questions = ["Please enter the project title", "Please Enter a Description","Please enter the installation instructions", "Please enter usage instructions", "Please enter license information", "Please give Contribution guidelines", "Please enter instructions on how to test your application", "What is your github username?", "What is your email address?"];
 
 
 // TODO: Create a function to write README file
@@ -57,7 +54,7 @@ function init() {
                 type: 'list',
                 name: 'license',
                 message: questions[++index],
-                choices: ["license 1", "license 2", "license 3"]
+                choices: ["MIT", "Apache", "Unlicense", "Open Database License"]
             },
             {
                 type: 'input',
@@ -69,7 +66,16 @@ function init() {
                 name: 'tests',
                 message: questions[++index]
             },
-
+            {
+                type: 'input',
+                name: 'username',
+                message: questions[++index]
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: questions[++index]
+            }
         ])
         .then((data) => {
             console.log(data);
@@ -79,6 +85,66 @@ function init() {
 
 function generateFile(data) {
     console.log("generateFile()");
+    const filename = "./generated/README.md";
+    let licenseBadge = "";
+    switch (data.license) {
+        case "MIT":
+            licenseBadge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+            break;
+        case "Apache":
+            licenseBadge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)]';
+            break;
+        case "Unlicense":
+            licenseBadge = '[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)';
+            break;
+        case "Open Database License":
+            licenseBadge = '[![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)]';
+            break;
+    }
+
+
+    let fileString = 
+    `# ${data.title}
+    ${licenseBadge}
+    
+    ## Description
+
+    ${data.description}
+
+    ## Table of Contents
+
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Contributing](#contributing)
+    - [License](#license)
+    - [Questions](#questions)
+
+    ## Installation
+
+    ${data.install}
+
+    ## Usage
+
+    ${data.usage}
+
+    ## Contributing
+
+    ${data.contributing}
+
+    ## License
+
+    This application is covered under the ${data.license} license.
+
+    ## Tests
+
+    ${data.tests}
+
+    ## Questions
+    My github profile can be found at github.com/${data.username}
+    If you have any questions, feel free to email me at ${data.email}
+    Thank you!!
+    `;
+    
 }
 
 // Function call to initialize app
