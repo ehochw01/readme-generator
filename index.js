@@ -18,11 +18,15 @@ THEN I am taken to the corresponding section of the README
 
 const inquirer = require('inquirer');
 const fs = require('fs');
-const questions = ["Please enter the project title", "Please Enter a Description","Please enter the installation instructions", "Please enter usage instructions", "Please enter license information", "Please give Contribution guidelines", "Please enter instructions on how to test your application", "What is your github username?", "What is your email address?"];
+const questions = ["Please enter the project title", "Please Enter a Description","Please enter the installation instructions", "Please enter usage instructions", "Please enter license information", "Please give Contribution guidelines", "Please enter instructions on how to test your application", "Enter your github username", "Enter your email address"];
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, fileTemplate) {
+    fs.writeFile(fileName, fileTemplate, (err) =>
+        err ? console.log(err) : console.log('Success!')
+    );
+}
 
 // TODO: Create a function to initialize app
 function init() {
@@ -92,59 +96,61 @@ function generateFile(data) {
             licenseBadge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
             break;
         case "Apache":
-            licenseBadge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)]';
+            licenseBadge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)';
             break;
         case "Unlicense":
             licenseBadge = '[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)';
             break;
         case "Open Database License":
-            licenseBadge = '[![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)]';
+            licenseBadge = '[![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)';
             break;
     }
 
 
     let fileString = 
     `# ${data.title}
-    ${licenseBadge}
+${licenseBadge}
     
-    ## Description
+## Description
 
-    ${data.description}
+${data.description}
 
-    ## Table of Contents
+## Table of Contents
 
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Contributing](#contributing)
-    - [License](#license)
-    - [Questions](#questions)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Questions](#questions)
 
-    ## Installation
+## Installation
 
-    ${data.install}
+${data.install}
 
-    ## Usage
+## Usage
 
-    ${data.usage}
+${data.usage}
 
-    ## Contributing
+## Contributing
 
-    ${data.contributing}
+${data.contributing}
 
-    ## License
+## License
 
-    This application is covered under the ${data.license} license.
+This application is covered under the ${data.license} license.
 
-    ## Tests
+## Tests
 
-    ${data.tests}
+${data.tests}
 
-    ## Questions
-    My github profile can be found at github.com/${data.username}
-    If you have any questions, feel free to email me at ${data.email}
-    Thank you!!
-    `;
+## Questions
+
+My github profile can be found at github.com/${data.username}
+If you have any questions, feel free to email me at ${data.email}
+Thank you!!
+`;
     
+    writeToFile(filename, fileString);
 }
 
 // Function call to initialize app
