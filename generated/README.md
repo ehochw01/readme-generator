@@ -1,5 +1,5 @@
-# Eric
-![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
+# Eric's Project
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
     
 ## Description
 
@@ -15,26 +15,27 @@ This is my description
 
 ## Installation
 
-These are my installation instructions
+Here are the installation instructions
 
 ## Usage
 
-These are my usage instructions
+Here is how to use my application
 
 ## Contributing
 
-These are my contribution guidelines
+Here is who contributed
 
 ## License
 
-This application is covered under the Apache license.
+This application is covered under the MIT license.
 
 ## Tests
 
-This is how you test my application
+This is how you test the application
 
 ## Questions
 
 My github profile can be found at github.com/ehochw01
+
 If you have any questions, feel free to email me at email@gmail.com
 Thank you!!
