@@ -7,6 +7,4 @@ Here is a professional README markdown file generator. Follow the prompts to cre
 Download the files, and run 'npm install -y' in folder that contains the package.json. Then you run the application by running 'node index'. Make sure you have node.js installed.
 
 ## Video
-Here is video that shows the usage of the application.
-
-<video src="./readme_generator_video.mp4" controls="controls" style="max"></video>
+A video that shows use of the application can be found at ./readme_generator_video.mp4. Please download the file to watch the video.
